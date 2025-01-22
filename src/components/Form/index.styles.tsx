@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -6,7 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     flexDirection: "column",
-    padding: 25,
+    padding: 22,
     gap: 8,
     backgroundColor: "#BBDEFB",
     borderRadius: 12,
@@ -33,10 +35,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#eff8ff",
   },
   calculateButton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#42A5F5",
     borderRadius: 6,
     padding: 8,
-    marginTop: 4,
+    width: "60%",
+    marginTop: 5,
     alignSelf: "center",
   },
 });

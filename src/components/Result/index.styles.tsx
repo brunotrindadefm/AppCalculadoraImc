@@ -5,15 +5,16 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 12,
     width: "100%",
     alignSelf: "center",
   },
   imcMessage: {
-    fontSize: 18,
+    fontSize: 20,
+    marginBottom: 3
   },
   imcResult: {
-    fontSize: 15,
+    fontSize: 18,
     color: "red",
   },
 });

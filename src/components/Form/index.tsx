@@ -19,15 +19,24 @@ const Form = () => {
   const [isHeightFocused, setIsHeightFocused] = useState<boolean>(false);
   const [isWeightFocused, setIsWeightFocused] = useState<boolean>(false);
 
-  const imcCalculator = (heightNum: number, weightNum: number) => {
-    const heightSquared = heightNum * heightNum;
-    const calculateImc = weightNum / heightSquared;
-    return setImc(parseFloat(calculateImc.toFixed(2)));
+  const imcCalculator = (heightNum: number, weightNum: number): void => {
+    const heightSquared = heightNum ** 2;
+    setImc(parseFloat((weightNum / heightSquared).toFixed(2)));
   };
 
-  const validatorCallImcCalculator = () => {
+  const validatorCallImcCalculator = (): void => {
     const heightNum = parseFloat(normalizeNumber(height));
     const weightNum = parseFloat(normalizeNumber(weight));
+
+    if (heightNum > 2.5 || heightNum < 0.6) {
+      setMessageImc("Altura inválida");
+      setImc(null);
+      return;
+    } else if (weightNum > 600 || weightNum < 2) {
+      setMessageImc("Peso inválido");
+      setImc(null);
+      return;
+    }
 
     if (
       !isNaN(heightNum) &&
@@ -41,6 +50,7 @@ const Form = () => {
       setWeight("");
       return;
     }
+
     setImc(null);
     setMessageImc("Preencha os campos");
   };
@@ -54,7 +64,6 @@ const Form = () => {
         <TextInput
           onChangeText={setHeight}
           value={height}
-          placeholder="Ex: 1.75"
           keyboardType="numeric"
           style={[styles.textInput, isHeightFocused && styles.textInputFocused]}
           onFocus={() => setIsHeightFocused(true)}
@@ -65,7 +74,6 @@ const Form = () => {
         <TextInput
           onChangeText={setWeight}
           value={weight}
-          placeholder="Ex: 78.2"
           keyboardType="numeric"
           style={[styles.textInput, isWeightFocused && styles.textInputFocused]}
           onFocus={() => setIsWeightFocused(true)}
@@ -79,11 +87,11 @@ const Form = () => {
           }}
           style={styles.calculateButton}
         >
-          <Text> Calcular</Text>
+          <Text style={{color: '#fff'}}>Calcular</Text>
         </TouchableOpacity>
       </View>
 
-      <Result resultImcMessage={messageImc} resultImc={imc ?? ""} />
+      <Result resultImcMessage={messageImc} imc={imc} />
     </View>
   );
 };
